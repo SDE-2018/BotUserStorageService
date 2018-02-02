@@ -11,6 +11,7 @@ public class BotUser implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	// TODO: maybe change type to String ?
 	private int chatId;
 	
 	private String name;
@@ -19,17 +20,23 @@ public class BotUser implements Serializable {
 	
 	private Date registerDate;
 	
-	/* Preferences **/
-	
 	/**
 	 * What user does in Trentino.
 	 */
 	private String occupation;
 	
+	
+	/* Preferences **/
+	
 	/**
 	 * Can be one of: <Skiing>, <Snowboarding>, <Free-ride>
 	 */
 	private String preferredSkiType;
+	
+	/**
+	 * In the range from 1 to 10 user should range how good he/she ski/snowboard.
+	 */
+	private int expertLevel;
 	
 	/**
 	 * Budget that user can spend in one day of skiing.	
@@ -57,7 +64,7 @@ public class BotUser implements Serializable {
 
 	public BotUser(int chatId, String name, int age, String occupation, 
 			String preferredSkiType, int budget,
-			boolean nearTrento, Date registerDate) {
+			boolean nearTrento, Date registerDate, int expertLevel) {
 		super();
 		this.chatId = chatId;
 		this.name = name;
@@ -66,6 +73,7 @@ public class BotUser implements Serializable {
 		this.preferredSkiType = preferredSkiType;
 		this.budget = budget;
 		this.nearTrento = nearTrento;
+		this.expertLevel = expertLevel;
 		this.setRegisterDate(registerDate);
 	}
 
@@ -135,5 +143,12 @@ public class BotUser implements Serializable {
 		this.registerDate = registerDate;
 	}
 
+	public int getExpertLevel() {
+		return expertLevel;
+	}
+
+	public void setExpertLevel(int expertLevel) {
+		this.expertLevel = expertLevel;
+	}
 }
 

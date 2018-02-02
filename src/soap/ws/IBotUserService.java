@@ -25,11 +25,17 @@ public interface IBotUserService {
 //    @WebResult(name="person") 
 //    public Person readPerson(@WebParam(name="idPerson") int id); 
 
-//    @WebMethod(operationName="updatePerson") // Method 3
-//    @WebResult(name="updatedPerson") 
-//    public Person updatePerson(@WebParam(name="person") Person person);
+    @WebMethod(operationName="setPreferences") 
+    @WebResult(name="updatedBotUser") 
+    public boolean updateBotUserPreferences(@WebParam(name="user") BotUser user) throws ApiException;
 
-    @WebMethod(operationName="createBotUser") // Method 4
+    @WebMethod(operationName="createBotUser") 
     @WebResult(name="createdBotUser") 
-    public boolean addUser(@WebParam(name="person") BotUser person) throws ApiException;
+    public boolean addUser(@WebParam(name="user") BotUser user) throws ApiException;
+    
+ 
 }
+
+
+
+
