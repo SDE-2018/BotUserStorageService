@@ -1,4 +1,4 @@
-package soap.ws;
+package soap.ws.botuser;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -14,16 +14,8 @@ import soap.model.BotUser;
 
 
 @WebService
-@SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
+@SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL)
 public interface IBotUserService {
-
-//    @WebMethod(operationName="readPersonList") // Method 1
-//    @WebResult(name="people") 
-//    public List<Person> getPeople();
-
-//    @WebMethod(operationName="readPerson") // Method 2
-//    @WebResult(name="person") 
-//    public Person readPerson(@WebParam(name="idPerson") int id); 
 
     @WebMethod(operationName="setPreferences") 
     @WebResult(name="updatedBotUser") 

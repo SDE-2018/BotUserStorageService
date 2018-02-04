@@ -1,4 +1,4 @@
-package soap.ws;
+package soap.ws.botuser;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import javax.jws.WebService;
 
@@ -23,7 +25,16 @@ import com.recombee.api_client.exceptions.ApiException;
 
 import soap.model.BotUser;
 
-@WebService(endpointInterface = "soap.ws.IBotUserService", serviceName="BotUserService")
+/**
+ * User Add and Update operations with Recombee API.
+ * Consumes BotUser from the client and fills corresponding information 
+ * in order to create/update the user at the Recombee database.
+ * 
+ * @author ivan
+ *
+ */
+@WebService(endpointInterface = "soap.ws.botuser.IBotUserService", 
+											serviceName="BotUserService")
 public class BotUserServiceImpl implements IBotUserService{
 	
 	private static RecombeeClient client;
@@ -32,8 +43,22 @@ public class BotUserServiceImpl implements IBotUserService{
 	
 	private static String DB_NAME;
 	
-	private static final Logger logger = Logger.getLogger(BotUserServiceImpl.class.getName());
+	private static final Logger logger = Logger.getLogger(
+										BotUserServiceImpl.class.getName());
 	
+	static {
+	    FileHandler fh;  
+	    try {  
+	        fh = new FileHandler("server-logs.log");  
+	        logger.addHandler(fh);
+	        SimpleFormatter formatter = new SimpleFormatter();  
+	        fh.setFormatter(formatter);  
+	    } catch (SecurityException e) {  
+	        e.printStackTrace();  
+	    } catch (IOException e) {  
+	        e.printStackTrace();  
+	    }  
+	}
 	
 	static {
 		Properties properties = new Properties();
@@ -67,7 +92,9 @@ public class BotUserServiceImpl implements IBotUserService{
 		}
 	}
 	
-	
+	/**
+	 * Create a new user at Recombee database.
+	 */
 	@Override
 	public boolean addUser(BotUser user) throws ApiException {
 		logger.info("Creating new user...");   
@@ -101,7 +128,10 @@ public class BotUserServiceImpl implements IBotUserService{
 	}
 
 	/**
-	 * 
+	 * Updates the preferences for the user.
+	 * It firstly creates a new user with preferences info only,
+	 * then merges with the one that's already in the system, but containing all
+	 * personal information.
 	 */
 	@Override
 	public boolean updateBotUserPreferences(BotUser user) throws ApiException {
@@ -126,7 +156,12 @@ public class BotUserServiceImpl implements IBotUserService{
     	
     	BatchResponse [] result = client.send(new Batch(userInfo));
     	try {
-    		// try to merge, if merge is unsuccessful, return false
+    		/*
+    		 * Try to merge, if merge is unsuccessful, return false.
+    		 * We shouldn't worry about assigning the same sourceUserId,
+    		 * according to Recombee documentation that user will be deleted
+    		 * immediately after the operation succeeds.
+    		 */
     		client.send(new MergeUsers(targetUserId, sourceUserId)
     					.setCascadeCreate(true));
     	} catch (Exception e) {
