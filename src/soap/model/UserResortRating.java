@@ -5,6 +5,7 @@ import java.sql.Date;
 
 import javax.persistence.Entity;
 
+// TODO: delete? maybe could be used for internal databased to store additional interactions...
 @Entity
 public class UserResortRating  implements Serializable{
 	

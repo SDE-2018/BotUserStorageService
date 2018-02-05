@@ -4,7 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.FileHandler;
@@ -14,13 +17,16 @@ import java.util.logging.SimpleFormatter;
 import javax.jws.WebService;
 
 import com.recombee.api_client.RecombeeClient;
+import com.recombee.api_client.api_requests.AddRating;
 import com.recombee.api_client.api_requests.AddUser;
 import com.recombee.api_client.api_requests.AddUserProperty;
 import com.recombee.api_client.api_requests.Batch;
+import com.recombee.api_client.api_requests.ListUsers;
 import com.recombee.api_client.api_requests.MergeUsers;
 import com.recombee.api_client.api_requests.Request;
 import com.recombee.api_client.api_requests.SetUserValues;
 import com.recombee.api_client.bindings.BatchResponse;
+import com.recombee.api_client.bindings.User;
 import com.recombee.api_client.exceptions.ApiException;
 
 import soap.model.BotUser;
@@ -172,6 +178,55 @@ public class BotUserServiceImpl implements IBotUserService{
     	
     	logger.info(result.toString());
         return true;
+	}
+
+	
+	/**
+	 * Get user profile by user id.
+	 */
+	@Override
+	public BotUser getUser(String userId) {
+		BotUser user = null;
+		try {
+			List<User> result = Arrays.asList(client.send(new ListUsers()
+					  .setFilter("\"" + userId + "\" in 'userId'")
+					  .setReturnProperties(true)
+					));
+			for (User u: result) {
+				if (u.getUserId().equals(userId)) {
+					user = new BotUser();
+					Map<String, Object> v = u.getValues();
+					if (v.get("name") != null) {
+						user.setName(v.get("name").toString());
+					}
+					if (v.get("age") != null) {
+						user.setAge(Integer.parseInt(v.get("age").toString()));
+					}
+					if (v.get("occupation") != null) {
+						user.setOccupation(v.get("occupation").toString());
+					}
+					if (v.get("preferredSkiType") != null) {
+						user.setPreferredSkiType(v.get("preferredSkiType").toString());
+					}
+					if (v.get("expertLevel") != null) {
+						user.setExpertLevel(Integer.parseInt(
+												v.get("expertLevel").toString()));
+					}
+					if (v.get("budget") != null) {
+						user.setBudget(Integer.parseInt(v.get("budget").toString()));
+					}
+					if (v.get("nearTrento") != null) {
+						user.setNearTrento(Boolean.parseBoolean(
+											v.get("nearTrento").toString()));
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.info(e.getMessage());
+		}
+		return user;
 	}
 
 }
