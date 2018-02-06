@@ -17,7 +17,6 @@ import java.util.logging.SimpleFormatter;
 import javax.jws.WebService;
 
 import com.recombee.api_client.RecombeeClient;
-import com.recombee.api_client.api_requests.AddRating;
 import com.recombee.api_client.api_requests.AddUser;
 import com.recombee.api_client.api_requests.AddUserProperty;
 import com.recombee.api_client.api_requests.Batch;
@@ -33,9 +32,11 @@ import soap.model.BotUser;
 import util.RecombeeUtil;
 
 /**
- * User Add and Update operations with Recombee API.
+ * User Add and Update operations using Recombee API.
  * Consumes BotUser from the client and fills corresponding information 
  * in order to create/update the user at the Recombee database.
+ * 
+ * Provides access to user profile by user id.
  * 
  * @author ivan
  *
@@ -236,7 +237,6 @@ public class BotUserServiceImpl implements IBotUserService{
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.info(e.getMessage());
 		}

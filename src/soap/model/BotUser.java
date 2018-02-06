@@ -6,6 +6,12 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 
+/**
+ * Entity representing a user.
+ * 
+ * @author ivan
+ *
+ */
 @Entity
 public class BotUser implements Serializable {
 	

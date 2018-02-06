@@ -15,7 +15,6 @@ import soap.model.BotUser;
 /**
  * Basic service from data layer give an interface to user creation
  * at Recombee database, get user profile by user id
- * evaluated.
  * 
  * @author ivan
  *
@@ -25,22 +24,26 @@ import soap.model.BotUser;
 public interface IBotUserService {
 
 	/**
-	 * 
-	 * @param user
-	 * @return
+	 * Updates user preferences.
+	 * @return true if successfully created, false otherwise
 	 * @throws ApiException
 	 */
     @WebMethod(operationName="setPreferences") 
     @WebResult(name="updatedBotUser") 
-    public boolean updateBotUserPreferences(@WebParam(name="user") BotUser user) throws ApiException;
+    public boolean updateBotUserPreferences(@WebParam(name="user") BotUser user) 
+    															throws ApiException;
 
-    
+    /**
+     * Creates a new user.
+     * @return true if successfully created, false otherwise
+     * @throws ApiException
+     */
     @WebMethod(operationName="createBotUser") 
     @WebResult(name="createdBotUser") 
     public boolean addUser(@WebParam(name="user") BotUser user) throws ApiException;
    
     /**
-     * Get user info by user id 
+     * Get user profile by user id.
      */
     @WebMethod(operationName="getBotUserById") 
     @WebResult(name="createdBotUserInfo") 
