@@ -1,0 +1,20 @@
+Feb 05, 2018 9:27:24 PM soap.ws.botuser.BotUserServiceImpl <clinit>
+INFO: properties have been already setup!
+Feb 05, 2018 9:46:41 PM soap.ws.botuser.BotUserServiceImpl addUser
+INFO: Creating new user...
+Feb 05, 2018 9:46:41 PM soap.ws.botuser.BotUserServiceImpl addUser
+INFO: {occupation=study, preferredSkiType=null, name=Ivan, nearTrento=false, expertLevel=0, age=0, registerDate=Mon Feb 05 21:46:29 CET 2018, budget=0}
+Feb 05, 2018 9:46:41 PM soap.ws.botuser.BotUserServiceImpl addUser
+INFO: [Lcom.recombee.api_client.bindings.BatchResponse;@b597bda
+Feb 05, 2018 9:54:10 PM soap.ws.botuser.BotUserServiceImpl getUser
+INFO: null
+Feb 05, 2018 9:56:00 PM soap.ws.botuser.BotUserServiceImpl addUser
+INFO: Creating new user...
+Feb 05, 2018 9:56:00 PM soap.ws.botuser.BotUserServiceImpl addUser
+INFO: {occupation=student, preferredSkiType=null, name=Ivan, nearTrento=false, expertLevel=0, age=22, registerDate=Mon Feb 05 21:55:54 CET 2018, budget=0}
+Feb 05, 2018 9:56:00 PM soap.ws.botuser.BotUserServiceImpl addUser
+INFO: [Lcom.recombee.api_client.bindings.BatchResponse;@79ec2795
+Feb 05, 2018 9:57:55 PM soap.ws.botuser.BotUserServiceImpl updateBotUserPreferences
+INFO: {preferredSkiType=skiing, nearTrento=true, expertLevel=6, budget=50}
+Feb 05, 2018 9:57:55 PM soap.ws.botuser.BotUserServiceImpl updateBotUserPreferences
+INFO: [Lcom.recombee.api_client.bindings.BatchResponse;@135f0081

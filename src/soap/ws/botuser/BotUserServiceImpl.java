@@ -30,6 +30,7 @@ import com.recombee.api_client.bindings.User;
 import com.recombee.api_client.exceptions.ApiException;
 
 import soap.model.BotUser;
+import util.RecombeeUtil;
 
 /**
  * User Add and Update operations with Recombee API.
@@ -67,6 +68,7 @@ public class BotUserServiceImpl implements IBotUserService{
 	}
 	
 	static {
+		/*
 		Properties properties = new Properties();
         try {
 			properties.load(new FileInputStream("local.properties"));
@@ -80,6 +82,18 @@ public class BotUserServiceImpl implements IBotUserService{
         RECOMBEE_TOKEN = properties.getProperty("RECOMBEE_TOKEN");
         DB_NAME = properties.getProperty("DB_NAME");
         client = new RecombeeClient(DB_NAME, RECOMBEE_TOKEN);
+		*/
+		
+		/**
+		 * TODO:
+		 * Server doesn't know the properties file path outside the .war,
+		 * so we have a separate class containing tokens.
+		 * This repository doesn't contain this class, so you if you clone the repo,
+		 * you should either define here your database name and token, or uncomment comment
+		 * above and put it into local.properties.
+		 */
+        client = RecombeeUtil.getRecombeeClient();
+        logger.info("recombee client initialized");
         
         // setup properties for user
         try {
