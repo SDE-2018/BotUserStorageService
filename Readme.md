@@ -2,7 +2,7 @@
 
 [https://buss-chernukha.herokuapp.com/botuser?wsdl](https://buss-chernukha.herokuapp.com/botuser?wsdl)
 
-Please, take a look at Javadoc here.
+Please, take a look at Javadoc [here](https://merryhunter.github.io/trentinoskibot/).
 
 To run the service you need to create a Recombee database and follow one of the option:  
 1. Create a file `local.properties` and put it there, after uncomment code `soap.ws.botuser.BotUserServiceImpl:71`  
